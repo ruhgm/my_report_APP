@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Return Visit{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Confirm Deletion</h1>
+        <p>Are you sure you want to delete the report for {{ report.date }}?</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="{% url 'report_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

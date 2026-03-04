@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Report App</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo"><a class="navbar-brand" href="{% url 'home' %}">
+    <img src="{% static 'images/logo.jpg' %}" alt="Report App Logo" height="40">
+</a></div>
+    
+    <nav>
+        <ul>
+           
+
+            {% if user.is_authenticated %}
+                <li>
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button class="nav-btn">Logout</button>
+                    </form>
+                </li>
+            {% else %}
+                <li><a href="{% url 'login' %}" class="nav-btn">Login</a></li>
+                
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+<section class="hero-section">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+
+           <div class="col-lg-12 hero-left">
+                <div class="hero-text">
+                    <h1>Track Your Activities Easily</h1>
+                    <p>Manage reports, keep track of return visits, and stay organized.</p>
+
+                   {% if user.is_authenticated %}
+    <a href="{% url 'landing_page' %}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+{% else %}
+    <a href="{% url 'signup' %}" class="btn btn-success btn-lg">Get Started</a>
+{% endif %}
+                </div>
+            </div>
+
+           
+
+        </div>
+    </div>
+</section>
+  
+
+<!-- ✅ FEATURES SECTION -->
+<section class="features">
+    <div class="feature-box">
+        <h3>📊 Manage Reports</h3>
+        <p>Add and review activity reports anytime.</p>
+    </div>
+
+    <div class="feature-box">
+        <h3>👥 Track Persons</h3>
+        <p>Keep record of return visits and contacts.</p>
+    </div>
+
+    <div class="feature-box">
+        <h3>🔒 Secure Access</h3>
+        <p>Your data is protected with user authentication.</p>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Report App. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

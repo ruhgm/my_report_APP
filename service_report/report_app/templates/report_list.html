@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Return Visit{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center">Reports</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time Spent</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+<tbody>
+    {% for report in reports %}
+        <tr>
+            <td>{{ report.date }}</td>
+            <td>{{ report.time_spent }}</td>
+            <td>
+                {% if report.id %}
+                    <a href="{% url 'edit_report' report.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ report.id }}">
+                        Delete
+                    </button>
+                    <!-- Delete Modal -->
+                    <div class="modal fade" id="deleteModal{{ report.id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ report.id }}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel{{ report.id }}">Confirm Delete</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this service report?
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="{% url 'delete_report' report.id %}" method="POST" style="display:inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <span>No valid ID</span>
+                {% endif %}
+            </td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="3" class="text-center">No reports found.</td>
+        </tr>
+    {% endfor %}
+</tbody>
+        </table>
+        <a href="{% url 'add_report' %}" class="btn btn-primary">Add Report</a>
+        <a href="{% url 'landing_page' %}" class="btn btn-primary">
+    Back to Landing Page
+</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

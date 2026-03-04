@@ -1,0 +1,244 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: #222;
+    color: white;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-btn {
+    background: #4CAF50;
+    border: none;
+    padding: 6px 12px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-btn.outline {
+    background: transparent;
+    border: 1px solid #4CAF50;
+}
+
+/* Hero Section */
+.hero {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(to right, #4CAF50, #2E8B57);
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background: white;
+    color: #2E8B57;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #f4f4f4;
+    transform: scale(1.05);
+}
+
+/* Features */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 60px 20px;
+}
+
+.feature-box {
+    width: 250px;
+    text-align: center;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #222;
+    color: white;
+}/* Navbar links styled as buttons */
+.navbar-nav .nav-link.nav-button {
+    display: inline-block;             /* Make link behave like a button */
+    background-color: #007bff;         /* Primary blue */
+    color: white !important;           /* White text */
+    padding: 8px 15px;                 /* Spacing */
+    margin-right: 5px;                 /* Space between buttons */
+    border-radius: 5px;                /* Rounded corners */
+    font-weight: 500;                  /* Semi-bold text */
+    text-align: center;                
+    transition: all 0.2s ease-in-out;  /* Smooth hover effect */
+    cursor: pointer;                   /* Hand cursor on hover */
+}
+
+/* Hover effect */
+.navbar-nav .nav-link.nav-button:hover {
+    background-color: #0056b3;         /* Darker blue */
+    color: #fff;
+    transform: translateY(-2px);       /* Slight lift */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Subtle shadow */
+}
+
+/* Active link (optional) */
+.navbar-nav .nav-link.nav-button.active {
+    background-color: #004085;         /* Even darker for current page */
+}
+/* Icon + text navbar */
+.navbar-nav .nav-icon {
+    display: flex;
+    flex-direction: column;   /* icon on top, text below */
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    color: #ffffff;           /* navbar text color */
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.navbar-nav .nav-icon i {
+    margin-bottom: 5px;       /* space between icon and text */
+}
+
+.navbar-nav .nav-icon:hover {
+    color: #28a745;           /* change color on hover */
+    transform: translateY(-3px);
+}
+
+.navbar-nav .nav-icon.active {
+    color: #ffc107;           /* highlight active page */
+}
+/* Make the entire column have a background image */
+/* ================= HERO SECTION ================= */
+
+.hero-section {
+    min-height: 100vh;
+}
+
+/* LEFT SIDE WITH BACKGROUND IMAGE */
+.hero-left {
+    position: relative;
+    min-height: 100vh;
+    background-image: url("../images/hero_image.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    padding: 60px;
+    color: #fff;
+}
+
+/* Dark overlay */
+.hero-left::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+
+/* Text content */
+.hero-text {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-text p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero-text .btn {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.hero-text .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* RIGHT SIDE */
+.hero-right {
+    background: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+.hero-text .btn {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero-left {
+    min-height: 100vh;
+    padding: 60px;
+}
+
+    .hero-text {
+        text-align: center;
+        margin: auto;
+    }
+}

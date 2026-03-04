@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Return Visit{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center">Return Visit</h1>
+        
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Phone Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for person in persons %}
+                <tr>
+                    <td>{{ person.name }}</td>
+                    <td>{{ person.location }}</td>
+                    <td>{{ person.phone_number }}</td>
+                    <td>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No persons recorded.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'add_rv' %}" class="btn btn-primary">Add Report</a>
+        <a href="{% url 'landing_page' %}" class="btn btn-primary">
+    Back to Landing Page
+</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

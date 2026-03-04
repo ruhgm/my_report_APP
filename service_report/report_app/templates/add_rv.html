@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Return Visit{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="card card-custom">
+        <h1 class="text-center">Return Visit Note</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label>Name</label>
+                {{ form.name }}
+            </div>
+
+            <div class="form-group">
+                <label>Additional Information</label>
+                {{ form.info }}
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                {{ form.location }}
+            </div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                {{ form.phone_number }}
+            </div>
+
+            <div class="form-group">
+                <label>Conversation Notes</label>
+                {{ form.conversation_notes }}
+            </div>
+
+            <div class="form-group">
+                <label>Next Appointment</label>
+                {{ form.next_appointment }}
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+                Add Return Visit Note
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'rv_list' %}" class="btn btn-secondary">
+                Back to Return Visit List
+            </a>
+        </div>
+
+    </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
