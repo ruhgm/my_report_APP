@@ -1,53 +1,53 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Return Visit{% endblock %}
+{% block title %}Edit Report{% endblock %}
 
 {% block content %}
+<div class="container mt-5" data-aos="fade-up">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- Glass Card -->
+            <div class="card glass-card shadow-sm p-4">
+                <h2 class="text-center mb-4">Edit Report</h2>
 
-    <div class="container" style="max-width: 600px;">
-        <h2 class="text-center mb-4">Edit Report</h2>
+                {% if messages %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {% for message in messages %}
+                            <span>{{ message }}</span>
+                        {% endfor %}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
 
-        {% if messages %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {% for message in messages %}
-                    <span>{{ message }}</span>
-                {% endfor %}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endif %}
+                <form method="POST" action="{% url 'edit_report' report.id %}">
+                    {% csrf_token %}
 
-        <form method="POST" action="{% url 'edit_report' report.id %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="id_date">Date:</label>
-                <input type="date" class="form-control" id="id_date" name="date" value="{{ form.date.value|default:'' }}" required>
-            </div>
-            <div class="form-group">
-                <label for="time_spent">Time Spent (Hours:Minutes):</label>
-                <input type="text" class="form-control" id="id_time_spent" name="time_spent" value="{{ form.time_spent.value|default:'' }}" required>
+                    <div class="form-group">
+                        <label for="id_date">Date</label>
+                        <input type="date" class="form-control modern-input" id="id_date" name="date" value="{{ form.date.value|default:'' }}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_time_spent">Time Spent (Hours:Minutes)</label>
+                        <input type="text" class="form-control modern-input" id="id_time_spent" name="time_spent" value="{{ form.time_spent.value|default:'' }}" required>
                         {% if form.time_spent.errors %}
-            <div class="alert alert-danger">
-                {% for error in form.time_spent.errors %}
-                    <p>{{ error }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
-            </div>
-            <button type="submit" class="btn btn-primary">Update Report</button>
-            <a href="{% url 'report_list' %}" class="btn btn-secondary">Cancel</a>
-        </form>
-    </div>
+                            <div class="alert alert-danger mt-2">
+                                {% for error in form.time_spent.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Show the alert if it has a message
-            // The alert div is already toggled by Django if there are messages
-            $('.alert').show();  // Show the message alert
-        });
-    </script>
+                    <div class="d-flex justify-content-between mt-3">
+                        <button type="submit" class="btn btn-primary">Update Report</button>
+                        <a href="{% url 'report_list' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

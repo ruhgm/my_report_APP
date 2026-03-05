@@ -165,6 +165,42 @@ def delete_report(request, report_id):
         return redirect('report_list')
     messages.error(request, "Invalid request method.")
     return redirect('report_list')
+@login_required
+def edit_rv(request, id):
+    person = get_object_or_404(Person, id=id)
+
+    # Optional: restrict editing to the user who created it
+    if person.user != request.user:
+        messages.error(request, "You do not have permission to edit this return visit.")
+        return redirect('rv_list')
+
+    if request.method == 'POST':
+        form = PersonForm(request.POST, instance=person)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Return visit updated successfully!")
+            return redirect('rv_list')
+    else:
+        form = PersonForm(instance=person)
+
+    return render(request, 'edit_rv.html', {'form': form, 'person': person})
+
+
+@login_required
+def delete_rv(request, id):
+    person = get_object_or_404(Person, id=id)
+
+    if person.user != request.user:
+        messages.error(request, "You do not have permission to delete this return visit.")
+        return redirect('rv_list')
+
+    if request.method == 'POST':
+        person.delete()
+        messages.success(request, "Return visit successfully deleted!")
+        return redirect('rv_list')
+
+    # Render confirmation page
+    return render(request, 'delete_rv.html', {'person': person})
 
 @login_required
 def add_rv(request):

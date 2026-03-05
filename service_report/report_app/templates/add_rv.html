@@ -3,73 +3,40 @@
 {% block title %}Add Return Visit{% endblock %}
 
 {% block content %}
-<div class="container mt-5 mb-5">
-    <div class="card card-custom">
-        <h1 class="text-center">Return Visit Note</h1>
+<div class="container mt-5" data-aos="fade-up">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- Glass Card -->
+            <div class="card glass-card shadow-sm p-4">
+                <h2 class="text-center mb-4">Add Return Visit</h2>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label for="name">Person's Name</label>
+                        <input type="text" class="form-control modern-input" id="name" name="name" required>
+                    </div>
 
-        <form method="POST">
-            {% csrf_token %}
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control modern-input" id="address" name="address" required>
+                    </div>
 
-            {% if form.errors %}
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        {% for field in form %}
-                            {% for error in field.errors %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
-                        {% endfor %}
-                        {% for error in form.non_field_errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
+                    <div class="form-group">
+                        <label for="date">Next Visit Date</label>
+                        <input type="date" class="form-control modern-input" id="date" name="date" required>
+                    </div>
 
-            <div class="form-group">
-                <label>Name</label>
-                {{ form.name }}
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <textarea class="form-control modern-input" id="notes" name="notes" rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Add Visit</button>
+                </form>
             </div>
-
-            <div class="form-group">
-                <label>Additional Information</label>
-                {{ form.info }}
-            </div>
-
-            <div class="form-group">
-                <label>Location</label>
-                {{ form.location }}
-            </div>
-
-            <div class="form-group">
-                <label>Phone Number</label>
-                {{ form.phone_number }}
-            </div>
-
-            <div class="form-group">
-                <label>Conversation Notes</label>
-                {{ form.conversation_notes }}
-            </div>
-
-            <div class="form-group">
-                <label>Next Appointment</label>
-                {{ form.next_appointment }}
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-block">
-                Add Return Visit Note
-            </button>
-        </form>
-
-        <div class="text-center mt-4">
-            <a href="{% url 'rv_list' %}" class="btn btn-secondary">
-                Back to Return Visit List
-            </a>
         </div>
-
     </div>
 </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock %}

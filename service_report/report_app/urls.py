@@ -12,6 +12,8 @@ from .views import (
     rv_list,
     edit_report,
     delete_report,
+    delete_rv,
+    edit_rv,
 )
 
 
@@ -27,4 +29,6 @@ urlpatterns = [
     path('rv_list/', rv_list, name='rv_list'), 
     path('edit_report/<int:id>/', edit_report, name='edit_report'),
     path('reports/delete/<int:report_id>/', delete_report, name='delete_report'),  # List of persons
+    path('edit_rv/<int:id>/', edit_rv, name='edit_rv'),
+    path('delete_rv/<int:id>/', delete_rv, name='delete_rv'),
 ]

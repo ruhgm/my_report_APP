@@ -1,244 +1,310 @@
-/* Reset */
+/* GLOBAL */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f6f9;
+    color: #333;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+}
+
+/* NAVBAR */
 /* Navbar */
 .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(12px);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Logo left, buttons right */
     align-items: center;
-    padding: 15px 50px;
-    background: #222;
-    color: white;
+    padding: 15px 60px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    z-index: 1000;
 }
 
-.navbar ul {
-    list-style: none;
+nav {
     display: flex;
-    gap: 20px;
     align-items: center;
 }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between buttons */
+}
+/* Smaller logo */
+.logo img {
+    height: 30px;  /* decreased from 40px */
+    width: auto;   /* keeps aspect ratio */
 }
 
 .nav-btn {
-    background: #4CAF50;
-    border: none;
-    padding: 6px 12px;
+    background: #6366F1; /* Modern color */
     color: white;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 25px;
     cursor: pointer;
-    border-radius: 5px;
+    transition: 0.3s ease;
 }
 
-.nav-btn.outline {
-    background: transparent;
-    border: 1px solid #4CAF50;
+.nav-btn:hover {
+    background: #4F46E5;
 }
 
-/* Hero Section */
+/* HERO */
+
 .hero {
-    height: 80vh;
+    height: 100vh;
+    padding-top: 100px; /* added space for navbar */
+    background: 
+        linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)),
+        url("../images/hero_image.jpg") center/cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(to right, #4CAF50, #2E8B57);
+}
+.hero-content {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    padding: 50px;
+    border-radius: 20px;
     color: white;
+    max-width: 600px;
 }
 
 .hero-content h1 {
-    font-size: 48px;
+    font-size: 3rem;
     margin-bottom: 20px;
 }
 
 .hero-content p {
-    font-size: 18px;
     margin-bottom: 30px;
 }
 
-.btn-primary {
-    background: white;
-    color: #2E8B57;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn-primary:hover {
-    background: #f4f4f4;
-    transform: scale(1.05);
-}
-
-/* Features */
-.features {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 60px 20px;
-}
-
-.feature-box {
-    width: 250px;
-    text-align: center;
-    padding: 20px;
-    background: #f4f4f4;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.feature-box:hover {
-    transform: translateY(-10px);
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #222;
-    color: white;
-}/* Navbar links styled as buttons */
-.navbar-nav .nav-link.nav-button {
-    display: inline-block;             /* Make link behave like a button */
-    background-color: #007bff;         /* Primary blue */
-    color: white !important;           /* White text */
-    padding: 8px 15px;                 /* Spacing */
-    margin-right: 5px;                 /* Space between buttons */
-    border-radius: 5px;                /* Rounded corners */
-    font-weight: 500;                  /* Semi-bold text */
-    text-align: center;                
-    transition: all 0.2s ease-in-out;  /* Smooth hover effect */
-    cursor: pointer;                   /* Hand cursor on hover */
-}
-
-/* Hover effect */
-.navbar-nav .nav-link.nav-button:hover {
-    background-color: #0056b3;         /* Darker blue */
-    color: #fff;
-    transform: translateY(-2px);       /* Slight lift */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Subtle shadow */
-}
-
-/* Active link (optional) */
-.navbar-nav .nav-link.nav-button.active {
-    background-color: #004085;         /* Even darker for current page */
-}
-/* Icon + text navbar */
-.navbar-nav .nav-icon {
-    display: flex;
-    flex-direction: column;   /* icon on top, text below */
-    align-items: center;
-    justify-content: center;
-    padding: 10px 15px;
-    color: #ffffff;           /* navbar text color */
-    text-decoration: none;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-}
-
-.navbar-nav .nav-icon i {
-    margin-bottom: 5px;       /* space between icon and text */
-}
-
-.navbar-nav .nav-icon:hover {
-    color: #28a745;           /* change color on hover */
-    transform: translateY(-3px);
-}
-
-.navbar-nav .nav-icon.active {
-    color: #ffc107;           /* highlight active page */
-}
-/* Make the entire column have a background image */
-/* ================= HERO SECTION ================= */
-
-.hero-section {
-    min-height: 100vh;
-}
-
-/* LEFT SIDE WITH BACKGROUND IMAGE */
-.hero-left {
-    position: relative;
-    min-height: 100vh;
-    background-image: url("../images/hero_image.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    padding: 60px;
-    color: #fff;
-}
-
-/* Dark overlay */
-.hero-left::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    z-index: 1;
-}
-
-/* Text content */
-.hero-text {
-    position: relative;
-    z-index: 2;
-    max-width: 500px;
-}
-
-.hero-text h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.hero-text p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-}
-
-.hero-text .btn {
+/* BUTTON */
+.btn {
     padding: 12px 30px;
-    border-radius: 50px;
+    border-radius: 30px;
+    text-decoration: none;
+    background: white;
+    color: #2e7d32;
     font-weight: 600;
     transition: 0.3s ease;
 }
 
-.hero-text .btn:hover {
+.btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* RIGHT SIDE */
-.hero-right {
-    background: #f8f9fa;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px;
+/* FEATURES & TESTIMONIALS */
+.features, .testimonials {
+    padding: 100px 60px;
+    text-align: center;
 }
-.hero-text .btn {
-    background-color: #ffffff;
-    color: #000000;
+
+.features {
+    background: #ffffff;
+}
+
+.testimonials {
+    background: #f9fafc;
+}
+
+.features-grid,
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.card,
+.testimonial-card {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.card:hover,
+.testimonial-card:hover {
+    transform: translateY(-10px);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #0F172A;
+    color: white;
+}
+
+
+/* DARK MODE */
+body.dark-mode {
+    background: #121212;
+    color: #f1f1f1;
+}
+
+body.dark-mode .navbar {
+    background: rgba(30,30,30,0.9);
+}
+
+body.dark-mode .features,
+body.dark-mode .testimonials {
+    background: #181818;
+}
+
+body.dark-mode .card,
+body.dark-mode .testimonial-card {
+    background: rgba(255,255,255,0.05);
+    color: #f1f1f1;
+}
+.hero, .features, .testimonials {
+    scroll-margin-top: 100px; /* same as navbar height */
+}
+/* Glass navbar */
+.glass-navbar {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    border-radius: 10px;
+}
+
+/* Navbar button */
+.navbar .btn {
+    border-radius: 25px;
+    padding: 8px 18px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+/* Logout/Login buttons in light mode */
+body:not(.dark-mode) .navbar .btn {
+    background: #6366F1;  /* modern purple/blue */
+    color: white;          /* visible on light navbar */
+}
+
+body:not(.dark-mode) .navbar .btn:hover {
+    background: #4F46E5;
+    color: white;
+}
+
+/* Logout/Login buttons in dark mode */
+body.dark-mode .navbar .btn {
+    background: #9CA3AF;  /* gray button on dark navbar */
+    color: #111;           /* visible on dark navbar */
+}
+
+body.dark-mode .navbar .btn:hover {
+    background: #6B7280;
+    color: #fff;
+}
+/* Smooth content spacing below navbar */
+.container {
+    scroll-behavior: smooth;
+}
+/* Glass Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.85); /* higher opacity for readability */
+    color: #111; /* ensure text is visible in light mode */
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* Tables inside glass cards */
+.modern-table {
+    color: inherit; /* inherit text color from card */
+}
+
+.modern-table tbody tr:hover {
+    background: rgba(99,102,241,0.1);
+    transition: 0.3s ease;
+}
+
+/* Modern Inputs */
+.modern-input {
+    background: rgba(255, 255, 255, 0.95); /* fully readable */
+    color: #111;
+    border-radius: 12px;
+    border: 1px solid rgba(200, 200, 200, 0.5);
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+}
+
+.modern-input:focus {
+    background: rgba(255,255,255,1);
+    border: 1px solid #6366F1;
+    box-shadow: 0 0 10px rgba(99,102,241,0.4);
+    outline: none;
+}
+
+/* Buttons */
+.btn-primary {
+    border-radius: 25px;
+    background: linear-gradient(135deg, #6366F1, #4F46E5);
     border: none;
-}
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .hero-left {
-    min-height: 100vh;
-    padding: 60px;
+    color: white;
 }
 
-    .hero-text {
-        text-align: center;
-        margin: auto;
-    }
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99,102,241,0.4);
+}
+
+.btn-secondary {
+    border-radius: 25px;
+    background: linear-gradient(135deg, #9CA3AF, #6B7280);
+    border: none;
+    color: white;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(107,114,128,0.4);
+}
+
+/* Dark Mode Overrides */
+body.dark-mode .glass-card {
+    background: rgba(30,30,30,0.85); /* darker but still readable */
+    color: #f1f1f1;
+}
+
+body.dark-mode .modern-input {
+    background: rgba(50,50,50,0.95);
+    color: #f1f1f1;
+}
+
+body.dark-mode .modern-input:focus {
+    background: rgba(60,60,60,1);
+    box-shadow: 0 0 10px rgba(139,92,246,0.6);
+}
+
+body.dark-mode .modern-table,
+body.dark-mode .modern-table thead,
+body.dark-mode .modern-table tbody tr {
+    color: #f1f1f1;
+}
+
+body.dark-mode .modern-table tbody tr:hover {
+    background: rgba(99,102,241,0.2);
 }
