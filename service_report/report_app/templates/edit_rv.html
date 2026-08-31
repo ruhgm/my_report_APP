@@ -6,65 +6,55 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <!-- Glass Card -->
             <div class="card glass-card shadow-sm p-4">
-                <h2 class="text-center mb-4">Edit Return Visit</h2>
 
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+                <h2 class="text-center mb-4">Edit Return Visit</h2>
 
                 <form method="POST">
                     {% csrf_token %}
 
-                    <!-- Name -->
-                    <div class="form-group">
-                        <label for="id_name">Name</label>
-                        {{ form.name|as_crispy_field }}
+                    <div class="form-group mb-3">
+                        <label>Name</label>
+                        {{ form.name }}
                     </div>
 
-                    <!-- Info -->
-                    <div class="form-group">
-                        <label for="id_info">Info</label>
-                        {{ form.info|as_crispy_field }}
+                    <div class="form-group mb-3">
+                        <label>Info</label>
+                        {{ form.info }}
                     </div>
 
-                    <!-- Location -->
-                    <div class="form-group">
-                        <label for="id_location">Location</label>
-                        {{ form.location|as_crispy_field }}
+                    <div class="form-group mb-3">
+                        <label>Location</label>
+                        {{ form.location }}
                     </div>
 
-                    <!-- Phone Number -->
-                    <div class="form-group">
-                        <label for="id_phone_number">Phone Number</label>
-                        {{ form.phone_number|as_crispy_field }}
+                    <div class="form-group mb-3">
+                        <label>Phone Number</label>
+                        {{ form.phone_number }}
                     </div>
 
-                    <!-- Conversation Notes -->
-                    <div class="form-group">
-                        <label for="id_conversation_notes">Conversation Notes</label>
-                        {{ form.conversation_notes|as_crispy_field }}
+                    <div class="form-group mb-3">
+                        <label>Conversation Notes</label>
+                        {{ form.conversation_notes }}
                     </div>
 
-                    <!-- Next Appointment -->
-                    <div class="form-group">
-                        <label for="id_next_appointment">Next Appointment</label>
-                        {{ form.next_appointment|as_crispy_field }}
+                    <div class="form-group mb-3">
+                        <label>Next Appointment</label>
+                        {{ form.next_appointment }}
                     </div>
 
                     <div class="d-flex justify-content-between mt-3">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{% url 'rv_list' %}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">
+                            Update
+                        </button>
+
+                        <a href="{% url 'rv_list' %}"
+                           class="btn btn-secondary">
+                            Cancel
+                        </a>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
