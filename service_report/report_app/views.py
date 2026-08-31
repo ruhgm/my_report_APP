@@ -176,19 +176,22 @@ def edit_report(request, id):
         }
     )
 @login_required
-def delete_report(request, report_id):
-    report = get_object_or_404(Activity, id=report_id)
-    print(f"Request Method: {request.method}")
-    print(f"Report ID: {report_id}")
-    if report.user != request.user:
-        messages.error(request, "You do not have permission to delete this report.")
-        return redirect('report_list')
+def delete_report(request, id):
+    report = get_object_or_404(
+        Activity,
+        id=id,
+        user=request.user
+    )
+
     if request.method == 'POST':
-        report.delete()  
-        messages.success(request, 'Report successfully deleted!')
+        report.delete()
         return redirect('report_list')
-    messages.error(request, "Invalid request method.")
-    return redirect('report_list')
+
+    return render(
+        request,
+        'confirm_delete.html',
+        {'report': report}
+    )
 @login_required
 def edit_rv(request, id):
     person = get_object_or_404(Person, id=id)
