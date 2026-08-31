@@ -1,79 +1,103 @@
 {% extends 'base.html' %}
 
-{% block title %}Edit Return Visit{% endblock %}
+{% block title %}Return Visit List{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card glass-card shadow-sm p-4">
-                <h2 class="text-center mb-4">Edit Return Visit</h2>
 
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Return Visit List</h2>
 
-                <form method="POST">
-                    {% csrf_token %}
+        <!-- Change 'add_rv' if your add URL has a different name -->
+        <a href="{% url 'add_rv' %}" class="btn btn-primary">
+            Add Return Visit
+        </a>
+    </div>
 
-                    <!-- Name -->
-                    <div class="form-group mb-3">
-                        <label for="id_name">Name</label>
-                        <input type="text" class="form-control" id="id_name" name="name"
-                               value="{{ form.name.value|default_if_none:'' }}">
-                    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
 
-                    <!-- Info -->
-                    <div class="form-group mb-3">
-                        <label for="id_info">Info</label>
-                        <input type="text" class="form-control" id="id_info" name="info"
-                               value="{{ form.info.value|default_if_none:'' }}">
-                    </div>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
 
-                    <!-- Location -->
-                    <div class="form-group mb-3">
-                        <label for="id_location">Location</label>
-                        <input type="text" class="form-control" id="id_location" name="location"
-                               value="{{ form.location.value|default_if_none:'' }}">
-                    </div>
+    {% if persons %}
+        <div class="card glass-card shadow-sm p-4">
+            <div class="table-responsive">
 
-                    <!-- Phone Number -->
-                    <div class="form-group mb-3">
-                        <label for="id_phone_number">Phone Number</label>
-                        <input type="text" class="form-control" id="id_phone_number" name="phone_number"
-                               value="{{ form.phone_number.value|default_if_none:'' }}">
-                    </div>
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Info</th>
+                            <th>Location</th>
+                            <th>Phone Number</th>
+                            <th>Conversation Notes</th>
+                            <th>Next Appointment</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
 
-                    <!-- Conversation Notes -->
-                    <div class="form-group mb-3">
-                        <label for="id_conversation_notes">Conversation Notes</label>
-                        <textarea class="form-control" id="id_conversation_notes" name="conversation_notes"
-                                  rows="4">{{ form.conversation_notes.value|default_if_none:'' }}</textarea>
-                    </div>
+                    <tbody>
+                        {% for person in persons %}
+                        <tr>
+                            <td>{{ person.name }}</td>
 
-                    <!-- Next Appointment -->
-                    <div class="form-group mb-3">
-                        <label for="id_next_appointment">Next Appointment</label>
-                        <input type="datetime-local" class="form-control" id="id_next_appointment"
-                               name="next_appointment"
-                               value="{{ form.next_appointment.value|default_if_none:'' }}">
-                    </div>
+                            <td>
+                                {{ person.info|default:"-" }}
+                            </td>
 
-                    <div class="d-flex justify-content-between mt-3">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{% url 'rv_list' %}" class="btn btn-secondary">Cancel</a>
-                    </div>
-                </form>
+                            <td>
+                                {{ person.location|default:"-" }}
+                            </td>
+
+                            <td>
+                                {{ person.phone_number|default:"-" }}
+                            </td>
+
+                            <td>
+                                {{ person.conversation_notes|default:"-" }}
+                            </td>
+
+                            <td>
+                                {% if person.next_appointment %}
+                                    {{ person.next_appointment|date:"M d, Y" }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <a href="{% url 'edit_rv' person.id %}"
+                                   class="btn btn-sm btn-primary">
+                                    Edit
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
 
             </div>
         </div>
-    </div>
+
+    {% else %}
+        <div class="card glass-card shadow-sm p-4 text-center">
+            <p class="mb-3">No return visits found.</p>
+
+            <a href="{% url 'add_rv' %}" class="btn btn-primary">
+                Add Return Visit
+            </a>
+        </div>
+    {% endif %}
+
 </div>
 {% endblock %}
