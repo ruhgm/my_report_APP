@@ -1,29 +1,16 @@
 {% extends 'base.html' %}
 
-{% block title %}Return Visit List{% endblock %}
+{% block title %}Return Visits{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Return Visit List</h2>
-
-        <!-- Change 'add_rv' if your add URL has a different name -->
-        <a href="{% url 'add_rv' %}" class="btn btn-primary">
-            Add Return Visit
-        </a>
-    </div>
+    <h2 class="text-center mb-4">Return Visit List</h2>
 
     {% if messages %}
         {% for message in messages %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-success">
                 {{ message }}
-
-                <button type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close">
-                </button>
             </div>
         {% endfor %}
     {% endif %}
@@ -32,14 +19,13 @@
         <div class="card glass-card shadow-sm p-4">
             <div class="table-responsive">
 
-                <table class="table table-hover align-middle">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Info</th>
                             <th>Location</th>
                             <th>Phone Number</th>
-                            <th>Conversation Notes</th>
                             <th>Next Appointment</th>
                             <th>Action</th>
                         </tr>
@@ -49,53 +35,35 @@
                         {% for person in persons %}
                         <tr>
                             <td>{{ person.name }}</td>
-
-                            <td>
-                                {{ person.info|default:"-" }}
-                            </td>
-
-                            <td>
-                                {{ person.location|default:"-" }}
-                            </td>
-
-                            <td>
-                                {{ person.phone_number|default:"-" }}
-                            </td>
-
-                            <td>
-                                {{ person.conversation_notes|default:"-" }}
-                            </td>
+                            <td>{{ person.info }}</td>
+                            <td>{{ person.location }}</td>
+                            <td>{{ person.phone_number }}</td>
 
                             <td>
                                 {% if person.next_appointment %}
-                                    {{ person.next_appointment|date:"M d, Y" }}
+                                    {{ person.next_appointment }}
                                 {% else %}
-                                    -
+                                    No appointment
                                 {% endif %}
                             </td>
 
                             <td>
                                 <a href="{% url 'edit_rv' person.id %}"
-                                   class="btn btn-sm btn-primary">
+                                   class="btn btn-primary btn-sm">
                                     Edit
                                 </a>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
-
                 </table>
 
             </div>
         </div>
 
     {% else %}
-        <div class="card glass-card shadow-sm p-4 text-center">
-            <p class="mb-3">No return visits found.</p>
-
-            <a href="{% url 'add_rv' %}" class="btn btn-primary">
-                Add Return Visit
-            </a>
+        <div class="alert alert-info text-center">
+            No return visits found.
         </div>
     {% endif %}
 
