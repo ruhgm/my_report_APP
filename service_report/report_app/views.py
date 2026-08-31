@@ -115,42 +115,66 @@ def add_report(request):
    
 @login_required
 def report_list(request):
-    reports = Activity.objects.all()
+    reports = Activity.objects.filter(user=request.user)
     report_data = []
 
     for report in reports:
-        if report.id:  # Check if the report has a valid ID
+        if report.id:
             hours = report.time_spent // 60
             minutes = report.time_spent % 60
+
             report_data.append({
                 'id': report.id,
                 'date': report.date,
-                'time_spent': f"{hours}:{minutes:02d}",  # Format to HH:MM
+                'time_spent': f"{hours}:{minutes:02d}",
                 'user': report.user.username if report.user else "Unknown",
-            }) 
-        else:
-            print(f"Invalid report ID detected: {report}")  # Debugging line for invalid IDs
+            })
 
     return render(request, 'report_list.html', {'reports': report_data})
 
 @login_required
 def edit_report(request, id):
-    report = get_object_or_404(Activity, id=id)
+    report = get_object_or_404(
+        Activity,
+        id=id,
+        user=request.user
+    )
 
     if request.method == 'POST':
         print("Form submitted")
+
         form = ActivityForm(request.POST, instance=report)
+
         if form.is_valid():
             print("Form is valid")
-            # Convert "HH:MM" to minutes if necessary
-            hours, minutes = map(int, form.cleaned_data['time_spent'].split(':'))
-            report.time_spent = hours * 60 + minutes  # Store in the desired format
-            report.date = form.cleaned_data['date']  # Update date if needed
-            report.save()  # Save the updated report
-            return redirect('report_list')  # Ensure this name matches your URL patterns
+
+            # Convert HH:MM to minutes
+            hours, minutes = map(
+                int,
+                form.cleaned_data['time_spent'].split(':')
+            )
+
+            report.time_spent = hours * 60 + minutes
+            report.date = form.cleaned_data['date']
+
+            # Keep the original owner
+            report.user = request.user
+
+            report.save()
+
+            return redirect('report_list')
+
     else:
-      form = ActivityForm(instance=report)
-      return render(request, 'edit_report.html', {'form': form, 'report': report})
+        form = ActivityForm(instance=report)
+
+    return render(
+        request,
+        'edit_report.html',
+        {
+            'form': form,
+            'report': report
+        }
+    )
 @login_required
 def delete_report(request, report_id):
     report = get_object_or_404(Activity, id=report_id)
