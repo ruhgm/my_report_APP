@@ -184,7 +184,10 @@ def edit_rv(request, id):
         form = PersonForm(instance=person)
 
     return render(request, 'edit_rv.html', {'form': form, 'person': person})
-
+@login_required
+def rv_list(request):
+    persons = Person.objects.all()
+    return render(request, 'rv_list.html', {'persons': persons})
 
 @login_required
 def delete_rv(request, id):
